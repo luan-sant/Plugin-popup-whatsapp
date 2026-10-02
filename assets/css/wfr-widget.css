@@ -1,0 +1,222 @@
+/* ===========================================================
+   WhatsApp Form Redirect — estilos do widget
+=========================================================== */
+
+#wfr-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, .5);
+  z-index: 999997;
+  display: none;
+  opacity: 0;
+  transition: opacity .2s ease;
+}
+#wfr-overlay.wfr-open {
+  display: block;
+  opacity: 1;
+}
+
+/* ---------- Botão flutuante ---------- */
+#wfr-launcher {
+  position: fixed;
+  bottom: 24px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: var(--wfr-primary, #25D366);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, .25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 999998;
+  transition: transform .2s ease, filter .2s ease;
+  border: none;
+}
+#wfr-launcher:hover {
+  transform: scale(1.06);
+  filter: brightness(0.92);
+}
+#wfr-launcher svg { width: 32px; height: 32px; }
+#wfr-launcher.wfr-pos-right { right: 24px; }
+#wfr-launcher.wfr-pos-left { left: 24px; }
+
+/* ---------- Popup ---------- */
+#wfr-popup {
+  position: fixed;
+  bottom: 96px;
+  width: 360px;
+  max-width: calc(100vw - 32px);
+  max-height: calc(100vh - 140px);
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, .25);
+  overflow: hidden;
+  display: none;
+  flex-direction: column;
+  z-index: 999999;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+}
+#wfr-popup.wfr-pos-right { right: 24px; }
+#wfr-popup.wfr-pos-left { left: 24px; }
+#wfr-popup.wfr-open { display: flex; }
+
+#wfr-popup-header {
+  background: var(--wfr-header, #2f8f7f);
+  color: #fff;
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+#wfr-popup-header svg { width: 22px; height: 22px; flex-shrink: 0; }
+#wfr-popup-header span { font-weight: 600; font-size: 16px; flex: 1; }
+#wfr-popup-close {
+  background: rgba(255, 255, 255, .15);
+  border: none;
+  color: #fff;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#wfr-popup-close:hover { background: rgba(255, 255, 255, .28); }
+
+#wfr-popup-body {
+  padding: 18px 18px 12px;
+  overflow-y: auto;
+  flex: 1;
+}
+#wfr-popup-body p.wfr-intro {
+  margin: 0 0 14px;
+  font-size: 14px;
+  color: #2b2b2b;
+  line-height: 1.4;
+}
+
+.wfr-field { margin-bottom: 14px; }
+.wfr-field label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: #2b2b2b;
+  margin-bottom: 4px;
+}
+.wfr-field input,
+.wfr-field select {
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid #ddd;
+  padding: 6px 2px;
+  font-size: 14px;
+  color: #2b2b2b;
+  background: transparent;
+  outline: none;
+  box-sizing: border-box;
+  font-family: inherit;
+  appearance: none;
+  -webkit-appearance: none;
+}
+.wfr-field select {
+  background: transparent url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23888'><path d='M7 10l5 5 5-5z'/></svg>") no-repeat right center / 16px 16px;
+  padding-right: 20px;
+}
+.wfr-field input:focus,
+.wfr-field select:focus { border-bottom-color: var(--wfr-header, #2f8f7f); }
+.wfr-field .wfr-error {
+  display: none;
+  color: #d84545;
+  font-size: 12px;
+  margin-top: 4px;
+}
+.wfr-field.wfr-invalid .wfr-error { display: block; }
+.wfr-field.wfr-invalid input,
+.wfr-field.wfr-invalid select { border-bottom-color: #d84545; }
+
+#wfr-popup-footer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  border-top: 1px solid #eee;
+  flex-shrink: 0;
+  background: #fff;
+}
+#wfr-popup-footer input {
+  flex: 1;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  padding: 10px 14px;
+  font-size: 14px;
+  outline: none;
+  font-family: inherit;
+}
+#wfr-popup-footer input:focus { border-color: var(--wfr-header, #2f8f7f); }
+#wfr-send-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--wfr-primary, #25D366);
+  border: none;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: filter .2s ease, opacity .2s ease;
+}
+#wfr-send-btn:hover { filter: brightness(0.92); }
+#wfr-send-btn:disabled { opacity: .6; cursor: not-allowed; }
+#wfr-send-btn svg { width: 18px; height: 18px; }
+
+#wfr-status-msg {
+  font-size: 13px;
+  text-align: center;
+  padding: 6px 16px 0;
+  color: #2b2b2b;
+  display: none;
+}
+#wfr-status-msg.wfr-show { display: block; }
+#wfr-status-msg.wfr-error-msg { color: #d84545; }
+
+/* Botão gerado pelo shortcode [wfr_button] */
+.wfr-open-form {
+  display: inline-block;
+  background: var(--wfr-primary, #25D366);
+  color: #fff;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 999px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: filter .2s ease;
+}
+.wfr-open-form:hover { filter: brightness(0.92); }
+
+/* ---------- Responsivo ---------- */
+@media (max-width: 480px) {
+  #wfr-popup {
+    right: 12px;
+    left: 12px;
+    bottom: 88px;
+    width: auto;
+    max-width: none;
+    max-height: calc(100vh - 120px);
+  }
+  #wfr-launcher.wfr-pos-right,
+  #wfr-launcher.wfr-pos-left {
+    right: 16px;
+    left: auto;
+    bottom: 16px;
+    width: 56px;
+    height: 56px;
+  }
+}
